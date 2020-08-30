@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Home from './components/Home/Home'
+import Greeting from './components/Greeting/Greeting';
+import AvatarSelected from './components/AvatarChoosing/Avatar';
+
 
 function App() {
+  const [step, setStep] = useState(0);
+  const nextStep = (step) => {
+    setStep(step);
+    console.log(step);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      { step === 0 ?  <Home {...{ step, nextStep }} />: null }
+      { step === 1 ?  <Greeting {...{ step, nextStep }} />: null }
+      { step === 2 ?  <AvatarSelected {...{ step, nextStep }} />: null }
     </div>
-  );
+  )
 }
 
 export default App;

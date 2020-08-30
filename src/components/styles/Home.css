@@ -1,0 +1,57 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    border: 0px solid red;
+}
+
+.valkyPlanet{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.buttonNext{
+    width: 15%;
+    margin-left: 42.5%;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+
+
+/* Desktops and laptops ----------- */
+
+@media only screen  and (max-width : 1000px) {
+    .valkyPlanet{
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 6%;
+        border: 0px solid red;;
+    }
+    
+    .buttonNext{
+        width: 20%;
+        margin-left: 40%;
+        margin-top: 5%;
+       
+    }
+}
+
+@media only screen  and (max-width : 600px) {
+    .valkyPlanet{
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 30%;
+        border: 0px solid blue;;
+    }
+    
+    .buttonNext{
+        width: 20%;
+        margin-left: 40%;
+        margin-top: 5%;
+       
+    }
+}
+
+
+    
