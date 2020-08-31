@@ -1,22 +1,36 @@
 import React, {useState, useEffect} from "react";
 import '../styles/Avatar.css'
-import valky1 from'../../images/avatars/avatar1.png';
 import buttonNext from'../../images/avatars/buttoncreate.png';
-import useInterval from '../../messageInterval';
-import { AnimateOnChange } from 'react-animation'
+import leftArrow from'../../images/avatars/leftArrow.png';
+import rightArrow from'../../images/avatars/rightArrow.png';
 
 
-const Greeting = (props) => {
+
+const Avatar = (props) => {
+
+  const [avatarImg, setAvatarImg] = useState(1);
+  const [avatarName, setAvatarName] = useState("");
+  const [errorName, setErrorName] = useState(false);
 
     const handleClick = (e) => {
-        props.nextStep(3);
+        props.avatar({img: valky[avatarImg], name: avatarName});
+        if (avatarName != ""){
+          setErrorName(false);
+          props.nextStep(3);
+        } else{
+          setErrorName(true);
+        }
+        
     };
 
-    const [avatarImg, setAvatarImg] = useState(1);
+    const handleName = (e) => {
+    
+      setAvatarName(e.target.value);
+    }
 
     const next = (e) => {
      
-      if(e.target.value == "right"){
+      if(e.target.id == "chooseright"){
         if(avatarImg == 10){
           setAvatarImg(1);
         } else {
@@ -24,7 +38,7 @@ const Greeting = (props) => {
         }
         
       } 
-      if (e.target.value == "left"){
+      if (e.target.id == "chooseleft"){
         if (avatarImg == 1){
           setAvatarImg(10);
         } else {
@@ -42,42 +56,35 @@ const Greeting = (props) => {
       valky[i] = require("../../images/avatars/"+ valkyName +".png")
     }
 
-  
-    useEffect(() => {
-        console.log(avatarImg)
-      
-    }, [avatarImg])
 
   return (
     <div className="containerA">
-       <div className="grid-item">
-         <p className="titleName">¿Como se llama tu Valkyavatar?</p>
-         <input className="inputName" type="text" placeholder="Valky Nombre"/>
-         <div className="contentLeft">
-           <img className="valkySet" src={valky1} alt=""/>
-         </div>
-         <img className="createButton" src={buttonNext} alt=""/>
-       </div>
-       <div className="grid-item">
-         <p className="titleAvatar">Elige tu Avatar</p>
-         
-         <div className="choose-container">
-              <button id="chooseleft" value="left" onClick={next}>
-              L
-              </button>
-              <img className="valkyChoose" src={valky[avatarImg]} alt=""/>
-              
-              <button id="chooseright" value="right" onClick={next}>
-                R
-              </button>
-         </div>
-         
-        
+      
+       <div className="content">
 
+         <p className="titleName">¿Como se llama tu Valkyavatar?</p>
+         <input className="inputName" type="text" placeholder="Valky Nombre" onChange={handleName}/>
+
+         <div className="contentLeft">
+
+           <div className="headContent">
+                <img id="chooseleft" src={leftArrow} alt="" onClick={next}/>
+                      
+                <p className="titleAvatar"> Elige tu Avatar</p>
+                <img id="chooseright" src={rightArrow} alt="" onClick={next}/>
+                    
+                <img className="valkySet" src={valky[avatarImg]} alt=""/>
+           </div>
+  
+         </div>
+ 
+         <img className="createButton" src={buttonNext} alt="" onClick={handleClick}/>
+         { errorName ? <p className="errorName" >Elige un nombre</p>:null }
        </div>
+     
     </div>
   );
 
 };
 
-export default Greeting;
+export default Avatar;
